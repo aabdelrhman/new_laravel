@@ -152,6 +152,10 @@ $data = array() ;
     $(document).ready(function(){
          $(".addCart").submit(function(e){
             e.preventDefault();
+            var cart = parseInt($('#cart').html());
+            cart++;
+            $('#cart').empty();
+            $('#cart').append(cart+' Items');
          });
      });
  </script>

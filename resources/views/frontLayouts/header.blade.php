@@ -101,7 +101,7 @@
 						</div>
 
 						<div class="wrap-icon right-section">
-                            @auth
+                            {{-- @auth --}}
                                 <div class="wrap-icon-section wishlist">
                                     <a href="#" class="link-direction">
                                         <i class="fa fa-heart" aria-hidden="true"></i>
@@ -115,7 +115,7 @@
                                     <a href="#" class="link-direction">
                                         <i class="fa fa-shopping-basket" aria-hidden="true"></i>
                                         <div class="left-info">
-                                            <span class="index">4 items</span>
+                                            <span class="index" id="cart">0 items</span>
                                             <span class="title">CART</span>
                                         </div>
                                     </a>
@@ -127,7 +127,7 @@
                                         <span></span>
                                     </a>
                                 </div>
-                            @endauth
+                            {{-- @endauth --}}
 						</div>
 
 					</div>
