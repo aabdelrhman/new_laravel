@@ -79,9 +79,9 @@ $data = array() ;
                                                     </ins>
                                                 </div>
                                             @endif
-                                            <form action="" method="post" class="addCart">
+                                            <form action="{{ Route('addCart') }}" method="post" class="addCart">
                                                 @csrf
-                                                <input type="hidden" name="id" id="{{$product->id}}">
+                                                <input type="hidden" name="id" value="{{$product->id}}">
                                                 <input type="submit" class="btn btn-danger btn-block" value="Add To Cart">
                                             </form>
                                 </div>
@@ -150,13 +150,36 @@ $data = array() ;
 @section('js')
 <script>
     $(document).ready(function(){
+
          $(".addCart").submit(function(e){
             e.preventDefault();
-            var cart = parseInt($('#cart').html());
-            cart++;
-            $('#cart').empty();
-            $('#cart').append(cart+' Items');
-         });
-     });
+            $.ajaxSetup({
+                statusCode: {
+                    401: function(){
+                        confirm('You must login or register first');
+                    },
+                    404: function(){
+                        alert('This product not found');
+                    }
+                }
+            });
+            $.ajax({
+                type:"POST",
+                url:"/addCart",
+                data : $(this).serialize(),
+                dataType: "json",
+                success:function(response) {
+                    alert(response.msg) ;
+                    if(response.msg == 'success massage'){
+                        var cart = parseInt($('#cart').html());
+                        cart++;
+                        $('#cart').empty();
+                        $('#cart').append(cart+' Items');
+                    }
+
+                },
+            });
+        });
+    });
  </script>
 @endsection

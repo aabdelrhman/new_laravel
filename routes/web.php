@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\ProductController;
@@ -27,13 +28,15 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
    //                  ===============   Routes Front   =================
     Route::middleware(['web'])->group(function () {
         Route::get('/' , [FrontController::class , 'index'])->name('Front.index');
+        Route::get('/about' , [FrontController::class , 'about'])->name('Front.about');
         Route::get('/shop' , [FrontController::class , 'shop'])->name('Front.shop');
         Route::get('/shop/brand/{id}' , [FrontController::class , 'shop_brand'])->name('Front.shop.brand');
         Route::get('/shop/section/{id}' , [FrontController::class , 'shop_section'])->name('Front.shop.section');
         Route::post('/shop' , [FrontController::class , 'shop_price_limit'])->name('Front.price.limit');
     });
     Route::middleware(['auth:web'])->group(function () {
-
+        Route::post('/addCart' , [CartController::class , 'store'])->name('addCart');
+        Route::get('/cart' , [FrontController::class , 'cart'])->name('Front.cart');
     });
     //                  ===============  END Routes Front   =================
     //                  ===============  Routes Admin   =================

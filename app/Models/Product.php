@@ -12,7 +12,13 @@ class Product extends Model
     use HasFactory , SoftDeletes;
 
     protected $fillable =[
-        'name_en' , 'name_ar' , 'desc_en' , 'desc_ar' , 'price' , 'photos' , 'section_id' , 'brand_id' , 'status'
+        'id' ,'name_en' , 'name_ar' , 'desc_en' , 'desc_ar' , 'price' , 'photos' , 'section_id' , 'brand_id' , 'status'
+    ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
     ];
 
     protected $casts = [

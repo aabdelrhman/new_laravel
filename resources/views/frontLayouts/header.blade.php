@@ -23,7 +23,7 @@
 							<ul>
                                 @auth
                                     <li class="menu-item menu-item-has-children parent" >
-                                        <a title="{{auth()->user()->name}}" href="#">{{auth()->user()->name}}<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                                        <a title="{{auth()->user()->name}}" href="{{Route('Front.cart')}}">{{auth()->user()->name}}<i class="fa fa-angle-down" aria-hidden="true"></i></a>
                                         <ul class="submenu curency" >
                                             <li class="menu-item" >
                                                 <a title="Log out" href="{{Route('logout')}}"
@@ -101,8 +101,8 @@
 						</div>
 
 						<div class="wrap-icon right-section">
-                            {{-- @auth --}}
-                                <div class="wrap-icon-section wishlist">
+                            @auth
+                                {{-- <div class="wrap-icon-section wishlist">
                                     <a href="#" class="link-direction">
                                         <i class="fa fa-heart" aria-hidden="true"></i>
                                         <div class="left-info">
@@ -110,12 +110,12 @@
                                             <span class="title">Wishlist</span>
                                         </div>
                                     </a>
-                                </div>
+                                </div> --}}
                                 <div class="wrap-icon-section minicart">
                                     <a href="#" class="link-direction">
                                         <i class="fa fa-shopping-basket" aria-hidden="true"></i>
                                         <div class="left-info">
-                                            <span class="index" id="cart">0 items</span>
+                                            <span class="index" id="cart">{{App\Models\Cart::where('user_id' , Auth::guard('web')->user()->id)->count()}} items</span>
                                             <span class="title">CART</span>
                                         </div>
                                     </a>
@@ -127,7 +127,7 @@
                                         <span></span>
                                     </a>
                                 </div>
-                            {{-- @endauth --}}
+                            @endauth
 						</div>
 
 					</div>
@@ -150,17 +150,17 @@
 						<div class="container">
 							<ul class="nav primary clone-main-menu" id="mercado_main" data-menuname="Main menu" >
 								<li class="menu-item home-icon">
-									<a href="index.html" class="link-term mercado-item-title"><i class="fa fa-home" aria-hidden="true"></i></a>
+									<a href="{{Url('/')}}" class="link-term mercado-item-title"><i class="fa fa-home" aria-hidden="true"></i></a>
 								</li>
 								<li class="menu-item">
-									<a href="about-us.html" class="link-term mercado-item-title">About Us</a>
+									<a href="{{Route('Front.about')}}" class="link-term mercado-item-title">About Us</a>
 								</li>
 								<li class="menu-item">
 									<a href="{{Route('Front.shop')}}" class="link-term mercado-item-title">Shop</a>
 								</li>
 								@auth
 								<li class="menu-item">
-									<a href="cart.html" class="link-term mercado-item-title">Cart</a>
+									<a href="{{Route('Front.cart')}}" class="link-term mercado-item-title">Cart</a>
 								</li>
 								@endauth
 								@auth

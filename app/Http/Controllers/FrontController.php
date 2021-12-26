@@ -19,10 +19,20 @@ class FrontController extends Controller
         // return get_defined_vars() ;
     }
 
+    public function about()
+    {
+        return view('Front.about');
+    }
+
     public function shop()
     {
         $products = Product::with('offer')->selectionProduct()->latest()->paginate(5);
         return view('Front.shop' , get_defined_vars());
+    }
+
+    public function cart()
+    {
+        return view('Front.cart');
     }
 
     public function shop_brand($brand_id)
@@ -43,4 +53,5 @@ class FrontController extends Controller
         $products = Product::with('offer')->selectionProduct()->whereBetween('price' , [$start , $end])->latest()->paginate(5);
         return view('Front.shop' , get_defined_vars());
     }
+
 }
